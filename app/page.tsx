@@ -10,12 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { useState } from "react";
-
+import { TurnoProvider } from "./context/TurnoProvider"; 
+import DatePicker from "./_components/DatePicker";
+import TimePicker from "./_components/TimePicker";
+import ConfirmarTurno from "./_components/ConfirmarTurno";
 
 export default function Home() {
 
   const [step, setStep] = useState(0)
-
   function nextStep(): void {
     setStep(step + 1)
   }
@@ -24,9 +26,10 @@ export default function Home() {
     setStep(step - 1)
   }
 
-
   return (
     <main className="w-full h-screen flex justify-center items-center">
+      <TurnoProvider>
+
           <Card className="w-[350px]">
             <CardHeader>
               <CardTitle>Logo</CardTitle>
@@ -41,30 +44,33 @@ export default function Home() {
 
               {/* Elegir día */}
               {step === 1 && (
-                <div>Elegir fecha</div>
+                <DatePicker />
               ) }
 
               {/* Elegir horario */}
               {step === 2 && (
-                <div>Elegir horario</div>
+                <TimePicker />
               ) }
 
               {/* Confirmar */}
               {step === 3 && (
-                <div>Confirmar</div>
+                <ConfirmarTurno />
               ) }
 
               {/* Gracias */}
               {step === 4 && (
                 <div>Gracias</div>
               ) }
-    
+
             </CardContent>
+
             {step !== 0 && <CardFooter className="flex justify-between">
               <Button onClick={prevStep}>Anterior</Button>
               <Button onClick={nextStep} variant="outline">Siguiente</Button>
             </CardFooter>}
           </Card>
-        </main>
+
+      </TurnoProvider>
+    </main>
   );
 }
