@@ -12,7 +12,7 @@ interface TurnoContextType {
   time: string;
   setTime: React.Dispatch<React.SetStateAction<string>>
   step: number
-  // setStep:React.Dispatch<React.SetStateAction<number>>
+  setStep:React.Dispatch<React.SetStateAction<number>>
   prevStep: () => void
   nextStep: () => void
 }
@@ -41,7 +41,7 @@ export function TurnoProvider({ children }: TurnoProviderProps): JSX.Element {
   }
 
   return (
-    <TurnoContext.Provider value={{ step, prevStep, nextStep, date, setDate, time, setTime }}>
+    <TurnoContext.Provider value={{ step, setStep, prevStep, nextStep, date, setDate, time, setTime }}>
       {children}
     </TurnoContext.Provider>
   );

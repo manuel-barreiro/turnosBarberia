@@ -13,10 +13,12 @@ import { useTurno } from "./context/TurnoProvider";
 import DatePicker from "./_components/DatePicker";
 import TimePicker from "./_components/TimePicker";
 import ConfirmarTurno from "./_components/ConfirmarTurno";
+import { Badge } from "@/components/ui/badge";
+import { format } from "date-fns";
 
 export default function Home() {
 
-  const { step, prevStep, nextStep, date, time } = useTurno()
+  const { step, setStep, prevStep, nextStep, date, time } = useTurno()
 
   return (
     <main className="w-full h-screen flex justify-center items-center">
@@ -25,6 +27,23 @@ export default function Home() {
           <CardTitle>Logo</CardTitle>
           <CardDescription>Agendá tu turno para cortarte el pelo.</CardDescription>
         </CardHeader>
+
+        {step != 0 &&
+        <div className='h-2 flex justify-center items-center gap-2 mb-4'>
+          {step >= 1 &&
+          <Badge className='cursor-pointer' onClick={() => setStep(1)}>
+            {format(date ? date : '', 'EEE d, MMM').toUpperCase()}
+          </Badge>}
+          {step >= 2 && 
+          <Badge className='cursor-pointer' onClick={() => setStep(2)}>
+            {time}
+          </Badge>}
+        </div>
+      }
+
+      {step != 0 && <div className="mb-4 max-w-[85%] mx-auto h-[0.5px] bg-gray-400 rounded-xl"></div>}
+        
+
         <CardContent className="flex justify-center items-center">
 
           {/* Welcome */}
@@ -60,8 +79,7 @@ export default function Home() {
           {(step === 1 && !date) || (step === 2 && !time) ?
             <Button variant="outline" disabled>Siguiente</Button> :
             <Button onClick={() => nextStep()} variant="outline">Siguiente</Button>
-          }
-          
+          }          
         </CardFooter>
         }
       </Card>
