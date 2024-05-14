@@ -21,22 +21,22 @@ function TimePicker() {
   
   return (
     <div className='flex flex-col items-center gap-5'>
-      <h2>Elegí una hora</h2>
+      {time && <h3 className='font-bold text-xl'>Elegí un horario</h3>}
 
       <Carousel 
         opts={
           {
-            dragFree: true
+            dragFree: false
           }
         }
         orientation="vertical"
         className='my-12 w-full max-w-sm'
       >
-        <CarouselContent className='-ml-1 h-44'>
+        <CarouselContent className='-ml-1 h-44 items-center'>
 
           {turnosDisponibles.map((hora, index) => 
             <CarouselItem key={index} className='pl-1 basis-1/3'>
-              <Button variant="secondary" className='text-xl font-bold p-6' onClick={() => setTime(hora)}>{hora}</Button>
+              <Button variant={hora === time ? "default" : "secondary"} className='text-xl font-bold p-6' onClick={() => setTime(hora)}>{hora}</Button>
             </CarouselItem>
           )}
           

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useContext, createContext } from 'react'
 
 type TurnoProviderProps = {
@@ -9,6 +11,10 @@ interface TurnoContextType {
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
   time: string;
   setTime: React.Dispatch<React.SetStateAction<string>>
+  step: number
+  // setStep:React.Dispatch<React.SetStateAction<number>>
+  prevStep: () => void
+  nextStep: () => void
 }
 
 const TurnoContext = createContext<TurnoContextType | undefined>(undefined)
@@ -20,16 +26,26 @@ export function useTurno(): TurnoContextType {
   }
   return context;
 }
+
 export function TurnoProvider({ children }: TurnoProviderProps): JSX.Element {
   const [date, setDate] = useState<Date | undefined>(undefined)
-  const [time, setTime] = useState<string>('');
+  const [time, setTime] = useState<string>('')
+  const [step, setStep] = useState(0)
+
+  function nextStep(): void {
+    setStep(prev => prev + 1)
+  }
+
+  function prevStep(): void {
+    setStep(prev => prev - 1)
+  }
 
   return (
-    <TurnoContext.Provider value={{ date, setDate, time, setTime }}>
+    <TurnoContext.Provider value={{ step, prevStep, nextStep, date, setDate, time, setTime }}>
       {children}
     </TurnoContext.Provider>
   );
 };
 
 
-export default TurnoContext
+export default TurnoProvider

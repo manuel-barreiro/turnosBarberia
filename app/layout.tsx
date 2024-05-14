@@ -11,6 +11,8 @@ export const metadata: Metadata = {
   description: "Agendá tu turno en nuestra barbería",
 };
 
+import  TurnoProvider from "./context/TurnoProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -18,9 +20,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>
-        {children}
-      </body>
+      <TurnoProvider>
+        <body className={inter.className}>
+          {children}
+        </body>
+      </TurnoProvider>
     </html>
   );
 }

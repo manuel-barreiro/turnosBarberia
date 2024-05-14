@@ -13,7 +13,8 @@ function DatePicker() {
 
   return (
     <div className='flex flex-col items-center gap-5'>
-      <h3>Seleccioná la fecha</h3>
+     <h3 className='font-bold text-xl'>Seleccioná la fecha</h3>
+      
 
       <Calendar
         mode="single"

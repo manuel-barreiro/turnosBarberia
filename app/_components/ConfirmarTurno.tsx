@@ -7,15 +7,15 @@ function ConfirmarTurno() {
 
   return (
     <div className='flex flex-col items-center gap-5'>
-      <h3>Confirmá tu turno</h3>
+      <h3 className='font-bold text-xl'>Confirmá tu turno</h3>
 
-      <div>
+      <p className='font-bold text-xl'>
         {date?.toDateString()}
-      </div>
+      </p>
 
-      <div>
+      <p className='font-bold text-xl'>
         {time}
-      </div>
+      </p>
 
       
 
