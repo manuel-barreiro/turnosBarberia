@@ -1,9 +1,11 @@
 import React from 'react'
 import { useTurno } from '../context/TurnoProvider'
+import { Button } from '@/components/ui/button'
+import { CalendarCheck } from 'lucide-react'
 
 function ConfirmarTurno() {
 
-  const { date, time } = useTurno()
+  const { date, time, nextStep } = useTurno()
 
   return (
     <div className='flex flex-col items-center gap-5'>
@@ -16,6 +18,11 @@ function ConfirmarTurno() {
       <p className='font-bold text-xl'>
         {time}
       </p>
+
+      <Button onClick={() => nextStep()} className='gap-2'>
+        <CalendarCheck />
+        Confirmar
+      </Button>
 
       
 

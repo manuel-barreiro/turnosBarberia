@@ -15,6 +15,8 @@ import TimePicker from "./_components/TimePicker";
 import ConfirmarTurno from "./_components/ConfirmarTurno";
 import { Badge } from "@/components/ui/badge";
 import { format } from "date-fns";
+import { CircleArrowLeft, CircleArrowRight } from "lucide-react";
+
 
 export default function Home() {
 
@@ -22,26 +24,26 @@ export default function Home() {
 
   return (
     <main className="w-full h-screen flex justify-center items-center">
-      <Card className="w-[350px]">
+      <Card className="w-[400px]">
         <CardHeader>
           <CardTitle>Logo</CardTitle>
           <CardDescription>Agendá tu turno para cortarte el pelo.</CardDescription>
         </CardHeader>
 
         {step != 0 &&
-        <div className='h-2 flex justify-center items-center gap-2 mb-4'>
-          {step >= 1 &&
+        <div className='h-1 flex justify-center items-center gap-2 mb-4'>
+          {step > 1 &&
           <Badge className='cursor-pointer' onClick={() => setStep(1)}>
             {format(date ? date : '', 'EEE d, MMM').toUpperCase()}
           </Badge>}
-          {step >= 2 && 
+          {step > 2 && 
           <Badge className='cursor-pointer' onClick={() => setStep(2)}>
             {time}
           </Badge>}
         </div>
       }
 
-      {step != 0 && <div className="mb-4 max-w-[85%] mx-auto h-[0.5px] bg-gray-400 rounded-xl"></div>}
+      {step != 0 && <div className="mb-4 max-w-[90%] mx-auto h-[0.5px] bg-gray-300 rounded-xl"></div>}
         
 
         <CardContent className="flex justify-center items-center">
@@ -73,12 +75,21 @@ export default function Home() {
 
         </CardContent>
 
-        {step !== 0 &&        
+        {step !== 0 && step <= 2 &&        
         <CardFooter className="flex justify-between">
-          <Button onClick={() => prevStep()}>Anterior</Button>
+          <Button onClick={() => prevStep()} className="gap-2">
+            <CircleArrowLeft />
+            Anterior
+          </Button>
           {(step === 1 && !date) || (step === 2 && !time) ?
-            <Button variant="outline" disabled>Siguiente</Button> :
-            <Button onClick={() => nextStep()} variant="outline">Siguiente</Button>
+            <Button variant="outline" disabled className="gap-2">         
+              Siguiente
+              <CircleArrowRight />           
+            </Button> :
+            <Button onClick={() => nextStep()} variant="outline" className="gap-2">
+              Siguiente
+              <CircleArrowRight /> 
+            </Button>
           }          
         </CardFooter>
         }
